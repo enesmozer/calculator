@@ -12,7 +12,8 @@ gulp.task('browser-sync', function () {
       baseDir: './'
     }
   })
-  gulp.watch('./*.html').on('change', reload)
+  gulp.watch('./js/*.js').on('change', reload);
+  gulp.watch('./*.html').on('change', reload);
   gulp.watch('./scss/**/*.scss', ['css'])
 })
 
