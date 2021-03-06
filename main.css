@@ -353,7 +353,7 @@ body {
           -ms-flex-pack: space-evenly;
               justify-content: space-evenly;
       height: 20%; }
-    .container .calculator-item {
+    .container .calculator-key {
       width: 25%;
       display: -webkit-box;
       display: -ms-flexbox;
