@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 // #region  Variables
 let number = 0;
 const display = document.querySelector('.calculator-screen');
@@ -56,7 +57,7 @@ const createResultString = (pressedKey, displayedNum, state) => {
   const keyType = getKeyType(pressedKey);
   const { firstValue, operator, modValue, previousKeyType } = state;
 
-  if (!Number.isNaN(keyType)) {
+  if (!isNaN(keyType)) {
     return displayedNum === '0' ||
       previousKeyType === keyTypes.OPERATOR ||
       previousKeyType === keyTypes.EQUAL
