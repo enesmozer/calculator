@@ -2,12 +2,14 @@
 
 body {
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: "Montserrat", sans-serif;
   font-weight: 100;
   color: white;
+  @include mq() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .container {
   @include mq() {
@@ -19,68 +21,57 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: 0 5px 30px rgba(black, 1);
-  .screen {
-    width: 100%;
-    height: 30%;
-    background-color: #515151;
-    font-size: 6em;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 10px;
-  }
-  // .clicked {
-  //   background-color: rgba(0, 0, 0, 0.2);
-  //   bottom: 0;
-  //   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5) inset;
-  //   content: "";
-  //   left: 0;
-  //   opacity: 0.3;
-  //   position: absolute;
-  //   right: 0;
-  //   top: 0;
-  //   z-index: 1;
-  // }
   .calculator {
-    height: 70%;
-    .row {
+    height: 100%;
+    &-screen {
+      width: 100%;
+      height: 30%;
+      background-color: #515151;
+      font-size: 6em;
       display: flex;
-      justify-content: space-evenly;
-      height: 20%;
-      background-color: #7c7878;
-      &:first-child {
-        background-color: #636363;
-      }
-    }
-    .row > *:active::before,
-    .row > .clicked:before {
-      background-color: rgba(0, 0, 0, 0.2);
-      bottom: 0;
-      box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5) inset;
-      content: "";
-      left: 0;
-      opacity: 0.3;
-      position: absolute;
-      right: 0;
-      top: 0;
-      z-index: 1;
-    }
-    &-key {
-      position: relative;
-      width: 25%;
-      display: flex;
+      justify-content: flex-end;
       align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      border: 0.5px solid rgba(black, 0.5);
-      &:last-child {
-        background-color: #f3a13c;
+      box-sizing: border-box;
+      padding: 10px;
+    }
+    &-keys {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 70%;
+      & > * {
+        position: relative;
+        font-size: 2rem;
+        border: 0.5px solid rgba(black, 0.5);
+        color: inherit;
+      }
+      button:focus {
+        outline:0 !important;
+      }
+      & > *:active::before,
+      & > .clicked:before {
+        background-color: rgba(black, .8);
+        bottom: 0;
+        box-shadow: 0 0 6px 0 rgba(black, .5) inset;
+        content: "";
+        left: 0;
+        opacity: 0.3;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
       }
     }
-
     .zero {
-      width: 50%;
+      grid-column: 1 / span 2;
+    }
+    .advance {
+      background-color: #636363;
+    }
+    .operator {
+      background-color: #f3a13c;
+    }
+    .number {
+      background-color: #7c7878;
     }
   }
 }
