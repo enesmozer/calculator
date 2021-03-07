@@ -1,28 +1,31 @@
-const gulp = require('gulp')
-const browserSync = require('browser-sync').create()
-const sass = require('gulp-sass')
-const prefix = require('gulp-autoprefixer')
-const plumber = require('gulp-plumber')
-const reload = browserSync.reload
+import { task, watch, src, dest } from 'gulp';
 
-gulp.task('browser-sync', function () {
+import sass from 'gulp-sass';
+import prefix from 'gulp-autoprefixer';
+import plumber from 'gulp-plumber';
+
+const browserSync = require('browser-sync').create();
+
+const { reload } = browserSync;
+
+task('browser-sync', () => {
   browserSync.init({
     notify: false,
     server: {
-      baseDir: './'
-    }
-  })
-  gulp.watch('./js/*.js').on('change', reload);
-  gulp.watch('./*.html').on('change', reload);
-  gulp.watch('./scss/**/*.scss', ['css'])
-})
+      baseDir: './',
+    },
+  });
+  watch('./js/*.js').on('change', reload);
+  watch('./*.html').on('change', reload);
+  watch('./scss/**/*.scss', ['css']);
+});
 
-gulp.task('css', () => {
-  return gulp.src('./scss/main.scss')
-  .pipe(plumber([{errorHandler: false}]))
-  .pipe(sass())
-  .pipe(prefix())
-  .pipe(gulp.dest('./'))
-  .pipe(browserSync.stream())
-})
-gulp.task('default', ['browser-sync', 'css'])
+task('css', () =>
+  src('./scss/main.scss')
+    .pipe(plumber([{ errorHandler: false }]))
+    .pipe(sass())
+    .pipe(prefix())
+    .pipe(dest('./'))
+    .pipe(browserSync.stream())
+);
+task('default', ['browser-sync', 'css']);
